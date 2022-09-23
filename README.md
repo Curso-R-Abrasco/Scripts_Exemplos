@@ -4,7 +4,7 @@
 
  Os *scripts* abaixo fornecem o código  base em **R** para uma análise de dados em Saúde, são eles:
 
-1. [Códigos para Covid-19(Scripts_Exemplos/Script_Covid-19) 
+1. [Códigos para Covid-19](Scripts_Exemplos/Script_Covid-19) 
 
 2. Códigos para Tuberculose
 
