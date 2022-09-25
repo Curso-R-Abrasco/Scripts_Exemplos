@@ -202,7 +202,15 @@ ggplot(comorb_ano,aes(fct_reorder(MORBIDADE,VALOR),VALOR))  +
 
 ## Piramide
 
-covid_fx <- UF_AM %>%
+
+pop_AM2 <- pop_AM  |> 
+  select (-Total) |> 
+  rename(fetar2 = `Faixa Etária`) |> 
+  mutate(nfaixa = 1:11) |> 
+  pivot_longer(cols = c(Masculino,Feminino),names_to = 'sexo',values_to = 'pop')
+
+
+ covid_fx <- UF_AM %>%
   filter(COVID ) %>% 
   filter (CS_SEXO != 'I' ) %>% 
   mutate (fetar = cut(as.numeric(NU_IDADE_N),
@@ -214,3 +222,37 @@ covid_fx <- UF_AM %>%
           EVOLUCAO = ifelse(is.na(EVOLUCAO) | EVOLUCAO == 3 |EVOLUCAO == 9,1,EVOLUCAO )   ) %>% 
   select(sexo,fetar,EVOLUCAO,ANO_EPI,SEM_EPI)
 
+ ## achar as maiores taxas
+ conta_fx <- covid_fx %>%  
+   group_by(sexo,fetar,EVOLUCAO) %>% 
+   count(name='casos') %>% 
+   mutate(nfaixa= as.numeric(fetar))  %>% 
+   left_join(pop_AM2,by=c('nfaixa','sexo')) %>% 
+   mutate(taxa = (casos/pop) * 10000) |> 
+   filter(!is.na(fetar))
+
+ 
+ 
+ ## fazer a piramide
+ ggplot(conta_fx,aes(x=fetar,y=taxa,fill=sexo)) +
+   geom_bar(data = conta %>% filter(sexo == 'Masculino' ), stat = "identity") +
+   geom_bar(data = conta %>% filter(sexo == 'Masculino' & EVOLUCAO == 2), 
+            stat = "identity",width = 0.5,fill='#000000',alpha=0.4) +
+   geom_bar(data = conta %>% filter(sexo == 'Feminino' ) %>% mutate(taxa = taxa * -1), stat = "identity") +
+   geom_bar(data = conta %>% filter(sexo == 'Feminino' & EVOLUCAO == 2) %>% mutate(taxa = taxa * -1), 
+            stat = "identity",width=0.5,fill='#000000',alpha=.4) +
+   scale_y_continuous(breaks = seq(-1500,1500,by=500),labels = abs,limits = c(-1500,1500)) +
+   scale_fill_manual(name="",values=c("#5274AD", "#DC913A",  "#000000"),
+                     breaks=c("Masculino","Feminino","Óbitos"),labels=c("Masculino", "Feminino", "Óbitos")) +
+   coord_flip() +
+   ylab('Taxa por 10.000 hab') + xlab('') +
+   theme_light() +
+   #tema_SMS +
+   theme(axis.text.x = element_text(color = "grey20", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+         axis.text.y = element_text(color = "grey20", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain") ,
+         axis.title.x = element_text(color = "grey20", size = 10, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+         axis.title.y = element_text(color = "grey20", size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain"),
+         legend.text=element_text(size=14),legend.position = 'bottom')
+ 
+
+ 
