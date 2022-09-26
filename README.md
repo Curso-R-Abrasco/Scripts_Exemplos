@@ -10,12 +10,10 @@
 
 3. Códigos para usar com SI-PNI
 
-4. Códigos para Arboviroses 
+4. [Códigos para Dengue](Script_Arbovirose/Script_Dengue.R)
 
 ---
 
 Os Scripts usam nomes dos campos comuns nas bases de Saúde e algumas vezes nos dados não identificados disponibilizados pelo Datasus, sugerimos uma consulta ao dicionario de dados de cada sistema.
 
 Os *scripts* geram alguns gráficos e tabelas comumente usados mas não esgotam as possibilidades. A ideia e que esses possam ser a base para que vocês mesmos aprimorem esses códigos e adequem  a suas necessidades. 
-
-

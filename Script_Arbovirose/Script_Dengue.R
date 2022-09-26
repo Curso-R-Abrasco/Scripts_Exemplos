@@ -19,10 +19,18 @@ onde <- 'bases'
 
 arqs <- dir(onde,pattern = '*.[dbf|DBF]$',full.names = TRUE)
 
-if (length(arqs) == 0) stop('Não existem arquivos DBF nesse diretorio')
+if (length(arqs) == 0) stop('Não existem arquivos DBF nesse diretório')
 arqs
 
-## 
+# Caso você receba a mensagem "Error: Não existem arquivos DBF nesse diretório"
+# Verifique o caminho (PATH) na  variável “onde” e se este diretório de fato 
+# contem os arquivos em DBF. Caso contrário você vai receber uma lista dos 
+# nomes dos arquivos disponíveis no diretório em questão.
+
+# Tudo estando certo vamos agora:
+# Vamos criar uma função para efetuar a leitura de diversos arquivos sem 
+# a necessidade de lermos um a um e depois juntar em um único pois a função 
+# vai se encarregar de fazer tudo isso.
 
 le_dengue <- function(x) {
   tmp <-   foreign::read.dbf(x,as.is = TRUE) %>% 
@@ -32,6 +40,8 @@ le_dengue <- function(x) {
 
 dengue.full <- arqs %>%  map_df(le_dengue)
 
+
+## 
 manter <- c("NU_NOTIFIC","ID_AGRAVO" , "DT_NOTIFIC", "SEM_NOT" , "NU_ANO" ,  "SG_UF_NOT" , "ID_MUNICIP" ,"ID_MN_RESI",
             "DT_SIN_PRI","DT_NASC", "NU_IDADE_N" ,"CS_SEXO", "CLASSI_FIN" ,"CRITERIO","SOROTIPO" ,"EVOLUCAO",'ID_BAIRRO',
             "sem_sint","ano_sint") 
@@ -45,3 +55,5 @@ dengue <- dengue.full %>%
   filter(ID_MN_RESI == '330455' & CLASSI_FIN != 5 & ID_AGRAVO == 'A90') %>%
   tibble() %>% 
   select(any_of(manter))
+
+
