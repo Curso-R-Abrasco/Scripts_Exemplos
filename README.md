@@ -4,9 +4,9 @@
 
  Os *scripts* abaixo fornecem o código  base em **R** para uma análise de dados em Saúde, são eles:
 
-1. [Códigos para Covid-19](Script_Covid-19/script_covid19.R)   ou preferem que o acesso seja via [RAW](https://raw.githubusercontent.com/Curso-R-Abrasco/Scripts_Exemplos/master/Script_Covid-19/script_covid19.R)
+1. [Códigos para Covid-19](Script_Covid-19/script_covid19.R)  
 
-2. Códigos para Tuberculose
+2. [Códigos para Tuberculose](Script_TB/Script_tuberculose.R)
 
 3. Códigos para usar com SI-PNI
 
