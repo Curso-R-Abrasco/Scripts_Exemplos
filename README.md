@@ -12,7 +12,7 @@ Os *scripts* geram alguns gráficos e tabelas comumente usados mas não esgotam 
 
 
 
-### Modulo 1
+#### Análise de dados para a vigilância em saúde
 
  Os *scripts* abaixo fornecem o código  base em **R** para uma análise de dados em Saúde, são eles:
 
@@ -26,6 +26,48 @@ Os *scripts* geram alguns gráficos e tabelas comumente usados mas não esgotam 
 
 
 
-### Modulo 2
+### Visualização de dados de interesse para a Vigilância em Saúde
+
+ 
+
+1.
+
+
+
+
+
+### Produção de relatórios automatizados
+
+
+
+
+
+
+
+### 
+
+### Construção de diagramas de controle na vigilância em saúde
+
+
+
+
+
+
+
+### Linkage de bases de dados oficiais de saúde
+
+
+
+### Análise espacial de dados para a vigilância em saúde
+
+
+
+
+
+### Construção de painéis (dashboards) para monitoramento de indicadores de saúde
+
+
+
+
 
 ---
